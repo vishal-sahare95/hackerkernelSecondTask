@@ -1,0 +1,20 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable, } from 'rxjs';
+import { Login, LoginC } from './login';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class LoginService {
+  url="https://api.escuelajs.co/api/v1/auth/login"
+  constructor(private http:HttpClient) { }
+
+  getUser():Observable<Login[]>{
+    return this.http.get<Login[]>(this.url)
+  }
+  postUser(data: LoginC) {
+    return this.http.post<LoginC>(`${this.url}`, data)
+  }
+
+}
