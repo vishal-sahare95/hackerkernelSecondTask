@@ -1,19 +1,20 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+    selector: 'app-header',
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
 
-  data:any
+    loginData: any
 
-  ngOnInit(): void {
-   this.data= localStorage.getItem(('loginData'))
-console.log(this.data);
-
-
-  }
+    ngOnInit(): void {
+        debugger
+        this.loginData = JSON.parse(sessionStorage.getItem('loginData') || '{}');
+       
+        console.log(this.loginData.role);
+        
+    }
 
 }

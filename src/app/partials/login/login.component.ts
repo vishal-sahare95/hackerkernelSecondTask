@@ -37,12 +37,13 @@ export class LoginComponent {
   }
   login() {
     this.loginSRV.getlogin().subscribe(suc => {
-      debugger
       const user = suc.find(f => {
         return (f.email === this.form.value.email && f.password === this.form.value.password)
       })
       if(user){
-        localStorage.setItem('loginData',JSON.stringify(user))  
+        sessionStorage.setItem('loginData',JSON.stringify(user))
+        this.router.navigateByUrl('dashboard')
+       
       }
 
     })

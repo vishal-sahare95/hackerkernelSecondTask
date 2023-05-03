@@ -1,1 +1,31 @@
-dashboard
+<app-header></app-header>
+<div class="container">
+    <div class="row">
+        <div class="col-4" *ngIf="localData.role=='admin'">
+            <table>
+                <tbody>
+                    <tr>
+                        <th>
+                            sr no 
+                        </th>
+                        <th>
+                            sr no 
+                        </th>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr *ngFor="let item of loginDataARR; let i=index">
+                        <td>{{i+1}}</td>
+                        <td>{{item.email}}</td>
+                        <td>{{item.password}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quis sint recusandae eius ipsam suscipit vel blanditiis molestias ratione ullam! Tempore nisi quibusdam id necessitatibus, reiciendis debitis vel magni molestiae. Blanditiis.
+    </div>
+
+</div>
