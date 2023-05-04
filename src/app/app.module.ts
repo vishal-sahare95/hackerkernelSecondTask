@@ -10,6 +10,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import{HttpClientModule} from '@angular/common/http'
 import { CategoriesModule } from './pages/admin/categories/categories.module';
 import {MatCardModule} from '@angular/material/card';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ChipsModule } from 'primeng/chips';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import {MatCardModule} from '@angular/material/card';
     BrowserAnimationsModule,
     HttpClientModule,
     CategoriesModule,
-    MatCardModule
+    MatCardModule,
+    NgbModule,
+    ChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

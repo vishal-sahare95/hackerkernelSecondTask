@@ -12,6 +12,10 @@ const routes: Routes = [
     path:'list',
     component:ListComponent
   },
+  {
+    path:':id',
+    component:AddComponent
+  },
 ];
 
 @NgModule({

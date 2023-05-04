@@ -18,8 +18,11 @@ export class CategoriesService {
   postCategories(data:CategoriesC):Observable<CategoriesC>{
     return this.http.post<CategoriesC>(this.url ,data)
   }
+  putCategories(id:number, data:CategoriesC):Observable<CategoriesC>{
+    return this.http.put<CategoriesC>(this.url+id ,data)
+  }
   deleteCategories(id:number){
-    this.http.delete<CategoriesC>(this.url+id)
+    return this.http.delete<CategoriesC>(this.url+id)
 
   }
 }
