@@ -10,76 +10,62 @@ import { ProductService } from 'src/app/config/login/admin/products/product.serv
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  // products: Product[]=[]
 
-  //   constructor(private productSRV: ProductService) { }
-
-  //   ngOnInit() {
-  //       this.productSRV.getAllProducts().subscribe(data => this.products = data);
-  //   }
-  customers: Product[]=[];
-categories=this.categorySRV.getAllCategories()
+  customers: Product[] = [];
+  categories = this.categorySRV.getAllCategories()
   first = 0;
 
   rows = 10;
-  productTitle?:string
-  price_min?:number
-  price_max?:number
-  categoryId?:number
-  isShowFilter:boolean=false
-  constructor(private ProductSRV: ProductService,private categorySRV:CategoriesService) { }
+  productTitle?: string
+  price_min?: number
+  price_max?: number
+  categoryId?: number
+  isShowFilter: boolean = false
+  constructor(private ProductSRV: ProductService, private categorySRV: CategoriesService) { }
 
   ngOnInit() {
-      this.ProductSRV.getAllProducts().subscribe(customers => this.customers = customers);
-  this.getFilterData()
-  
-    }
+    this.ProductSRV.getAllProducts().subscribe(customers => this.customers = customers);
+    this.getFilterData()
 
-  getFilterData(){
-    this.ProductSRV.getFilterProducts(this.productTitle, this.price_min, this.price_max, this.categoryId, )
-    .subscribe(products => {
+  }
+
+  getFilterData() {
+    this.ProductSRV.getFilterProducts(this.productTitle, this.price_min, this.price_max, this.categoryId,)
+      .subscribe(products => {
         this.customers = products
         console.log(products);
         console.log(this.customers);
-        
-    }
-        
-        
-        )
-    }
-    valueCheck(id:number|undefined){
-        this.categoryId=id
 
-    }
-  
-  filterShow(){
-    this.isShowFilter=!this.isShowFilter
+      }
+      )
   }
-  // deleteCategory(id:number){
-  //   this.ProductSRV(id).subscribe(suc=>{
-  //     console.log(suc);
-      
-  //     this.gatAllCategory()
-  //   })
+  valueCheck(id: number | undefined) {
+    this.categoryId = id
+
+  }
+
+  filterShow() {
+    this.isShowFilter = !this.isShowFilter
+  }
 
   next() {
-      this.first = this.first + this.rows;
+    this.first = this.first + this.rows;
   }
 
   prev() {
-      this.first = this.first - this.rows;
+    this.first = this.first - this.rows;
   }
 
   reset() {
-      this.first = 0;
+    this.first = 0;
   }
 
   isLastPage(): boolean {
-      return this.customers ? this.first === (this.customers.length - this.rows): true;
+    return this.customers ? this.first === (this.customers.length - this.rows) : true;
   }
 
   isFirstPage(): boolean {
-      return this.customers ? this.first === 0 : true;
+    return this.customers ? this.first === 0 : true;
   }
 
 }
