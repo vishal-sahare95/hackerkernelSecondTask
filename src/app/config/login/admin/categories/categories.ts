@@ -1,11 +1,11 @@
 export interface Categories {
-    id?: number,
+    id?: number|undefined,
     name:string,
     image: string
 }
 
 export class CategoriesC implements Categories{
-    id?: number;
+    id?: number|undefined;
     name:string;
     image: string;
     constructor(private obj:Categories){

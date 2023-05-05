@@ -45,7 +45,7 @@ export class LoginComponent {
           this.loginSRV.postUser(this.form.value).subscribe(suc => {
             console.log(suc.access_token);
             localStorage.setItem('token', JSON.stringify(suc.access_token));
-            //   this.router.navigateByUrl('')
+            this.router.navigateByUrl('dashboard')
           },
           error=>{
               alert('something wrong')

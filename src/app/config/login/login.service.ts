@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, } from 'rxjs';
+import { BehaviorSubject, Observable, } from 'rxjs';
 import { Login, LoginC } from './login';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
+  islogInValue=new BehaviorSubject(this.isLogin())
   url="https://api.escuelajs.co/api/v1/auth/login"
   constructor(private http:HttpClient) { }
 
@@ -15,6 +16,9 @@ export class LoginService {
   }
   postUser(data: LoginC) {
     return this.http.post<LoginC>(`${this.url}`, data)
+  }
+  isLogin(){
+   return !! (localStorage.getItem('token'))
   }
 
 }

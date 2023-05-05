@@ -1,0 +1,89 @@
+<!-- <div class="product">
+    <p-table [value]="products" [tableStyle]="{'min-width': '50rem'}">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>TITLE</th>
+                <th>DESRIPTION</th>
+                <th>PRICE</th>
+                <th>CATRGORY NAME</th>
+                <th>IMAGES</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+            <tr>
+                <td>{{product.title}}</td>
+                <td>{{product.description}}</td>
+                <td>{{product.price}}</td>
+                <td>{{product.category.name}}</td>
+                <td class="product-img"><img [src]="[product.images]" alt="" srcset=""></td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div> -->
+
+<div class="product  container">
+    <div class="mt-5 mb-5 text-center fs-1 fw-bold"> product data  </div>
+    <div class="flex justify-content-center mb-3">
+       <button class="btn btn-info" (click)="filterShow()"><i class="bi bi-funnel-fill"></i></button>
+       <button class="btn btn-success" [routerLink]="['/product/add']">add product</button>
+<div class="d-flex" *ngIf="isShowFilter">
+
+    <input type="text" class="form-control" [(ngModel)]="productTitle" placeholder="product title">
+    <input type="text" class="form-control"  [(ngModel)]="price_min" placeholder="min price">
+    <input type="text" class="form-control"  [(ngModel)]="price_max" placeholder="max price">
+    <select name="" id="" class="form-control"  [(ngModel)]="categoryId"  >
+        <option value="" selected>select </option>
+        <option [value]="category.id" (click)="valueCheck(category.id)" *ngFor="let category of categories |async">{{category.name}}</option>
+    </select>
+    <button class="btn btn-success" (click)="getFilterData()">flilter</button>
+</div>
+    </div>
+    <p-table #dt class="card" [value]="customers" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" [tableStyle]="{'min-width': '50rem'}"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]" [globalFilterFields]="['title','description']">
+        
+        <ng-template pTemplate="caption">
+            <div class=" search d-flex justify-content-end">
+              <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+              <input type="text" class="form-control" pInputText size="50" placeholder="Global Filter"
+                (input)="dt.filterGlobal($any($event.target).value, 'contains')" style="width:auto">
+            </div>
+          </ng-template>
+     ,KDFNDSKJFH
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width:25%">SR NO</th>
+                <th style="width:25%">TITLE</th>
+                <th style="width:25%">DESRIPTION</th>
+                <th style="width:25%">PRICE</th>
+                <th style="width:25%">CATRGORY NAME</th>
+                <th style="width:25%">IMAGES</th>
+                <th style="width:25%">action</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product let-i="rowIndex">
+            <tr>
+                
+                <td>{{i+1}}</td>
+                <td>{{product.title}}</td>
+                <td>{{product.description}}</td>
+                <td>{{product.price}}</td>
+                <td>{{product.category.name}}</td>
+                <td class="product-img"><img [src]="[product.images]" alt="" srcset=""></td>
+                <td > 
+                    <div class="d-flex" >
+                         <button class=" btn btn-info" [routerLink]="['/product/',product.id]"> <i class="bi bi-pencil-square"></i></button>
+                         <button class=" btn btn-danger ms-2"> <i class="bi bi-trash"></i></button>
+                    </div>
+                </td>
+              
+            </tr>
+        </ng-template>
+        <!-- <ng-template pTemplate="paginatorleft">
+            <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+        </ng-template>
+        <ng-template pTemplate="paginatorright">
+            <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+        </ng-template> -->
+    </p-table>
+</div>
+

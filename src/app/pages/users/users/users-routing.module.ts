@@ -7,7 +7,7 @@ const routes: Routes = [
   {
     path:'add',
     component:AddComponent
-  },
+  },  
   {
     path:'list',
     component:ListComponent
@@ -16,10 +16,11 @@ const routes: Routes = [
     path:':id',
     component:AddComponent
   },
+
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ProductsRoutingModule { }
+export class UsersRoutingModule { }

@@ -27,3 +27,13 @@ export class ProductC implements Product {
    
     }
 }
+export interface ProductPG{
+    data:Product[];
+}
+export class ProductCPGC{
+    data:Product[];
+    constructor(obj?:ProductPG){
+    this.data = obj && obj.data || [];    
+    }
+
+}

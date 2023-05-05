@@ -1,0 +1,64 @@
+<div class="d-flex justify-content-center mt-5">
+    <div class="card col-md-8 col-12 p-3 ">
+        <div class="card-header text-center">
+            <h1>
+                Add user
+            </h1>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="form">
+                <div class="form-group mt-3">
+                    <label for="name">user email</label>
+                    <input type="text" class="form-control" id="name" formControlName="email">
+                    <div class="text-danger">
+                        <ng-container *ngFor="let error of errorMSG.email">
+                            <ng-container *ngIf="email?.hasError(error.type) && (email?.dirty || email?.touched)">
+                                {{error.message}}
+                            </ng-container>
+                        </ng-container>
+                    </div>
+
+                </div>
+                <div class="form-group mt-3">
+                    <label for="name">user password</label>
+                    <input type="text" class="form-control" id="name" formControlName="password">
+                    <div class="text-danger">
+                        <ng-container *ngFor="let error of errorMSG.password">
+                            <ng-container *ngIf="password?.hasError(error.type) && (password?.dirty || password?.touched)">
+                                {{error.message}}
+                            </ng-container>
+                        </ng-container>
+                    </div>
+
+                </div>
+                <div class="form-group mt-3" *ngIf="!isEditFieldHide">
+                    <label for="name">user name</label>
+                    <input type="text" class="form-control" id="name" formControlName="name">
+                    <div class="text-danger">
+                        <ng-container *ngFor="let error of errorMSG.name">
+                            <ng-container *ngIf="name?.hasError(error.type) && (name?.dirty || name?.touched)">
+                                {{error.message}}
+                            </ng-container>
+                        </ng-container>
+                    </div>
+
+                </div>
+         
+                <div class="form-group mt-3" *ngIf="!isEditFieldHide">
+                    <label for="name">user name</label>
+                    <input type="text" class="form-control" id="name" formControlName="avatar">
+                    <div class="text-danger">
+                        <ng-container *ngFor="let error of errorMSG.avatar">
+                            <ng-container *ngIf="avatar?.hasError(error.type) && (avatar?.dirty || avatar?.touched)">
+                                {{error.message}}
+                            </ng-container>
+                        </ng-container>
+                    </div>
+
+                </div>
+              
+                <button class="btn btn-success mt-5" (click)="saveData()">save</button>
+            </form>
+        </div>
+    </div>
+</div>

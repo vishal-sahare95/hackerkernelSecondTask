@@ -12,12 +12,13 @@ import { CategoriesModule } from './pages/admin/categories/categories.module';
 import {MatCardModule} from '@angular/material/card';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ChipsModule } from 'primeng/chips';
-
+import { DashboardComponent } from './partial/dashboard/dashboard.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    MenuComponent
+    MenuComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

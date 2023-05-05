@@ -1,0 +1,69 @@
+<div class="product  container">
+    <div class="mt-5 mb-5 text-center fs-1 fw-bold"> user data  </div>
+    
+    <p-table #dt class="card" [value]="usersARR" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" [tableStyle]="{'min-width': '50rem'}"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]" [globalFilterFields]="['title','description']">
+        
+        <ng-template pTemplate="caption">
+            <div class=" search d-flex justify-content-end">
+              <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+              <input type="text" class="form-control" pInputText size="50" placeholder="Global Filter"
+                (input)="dt.filterGlobal($any($event.target).value, 'contains')" style="width:auto">
+            </div>
+          </ng-template>
+     ,KDFNDSKJFH
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width:25%">SR NO</th>
+                <th style="width:25%">name</th>
+                <th style="width:25%">avatar</th>
+                <th style="width:25%">email</th>
+                <th style="width:25%">password</th>
+                <th style="width:25%">role</th>
+                <th style="width:25%">action</th>
+              
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product let-i="rowIndex">
+            <tr>
+                
+                <td>{{i+1}}</td>
+                <td>{{product.name}}</td>
+                <td>{{product.avatar}}</td>
+                <td>{{product.email}}</td>
+                <td>{{product.password}}</td>
+                <td>{{product.role}}</td>
+                <td > 
+                    <div class="d-flex" >
+                         <button class=" btn btn-info" [routerLink]="['/users/',product.id]"> <i class="bi bi-pencil-square"></i></button>
+                         <button class=" btn btn-danger ms-2"> <i class="bi bi-trash"></i></button>
+                    </div>
+                </td>
+              
+            </tr>
+        </ng-template>
+        
+    </p-table>
+</div>
+<!-- <div class="product">
+    <p-table [value]="usersARR" [tableStyle]="{'min-width': '50rem'}">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>TITLE</th>
+                <th>DESRIPTION</th>
+                <th>PRICE</th>
+                <th>CATRGORY NAME</th>
+                <th>IMAGES</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+            <tr>
+                <td>{{product.name}}</td>
+                <td>{{product.description}}</td>
+                <td>{{product.price}}</td>
+                <td>{{product.category.name}}</td>
+                <td class="product-img"><img [src]="[product.images]" alt="" srcset=""></td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div> -->

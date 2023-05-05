@@ -1,5 +1,6 @@
 import { Component,OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute,  Router } from '@angular/router';
 import { Categories } from 'src/app/config/login/admin/categories/categories';
 import { CategoriesService } from 'src/app/config/login/admin/categories/categories.service';
 import { Product } from 'src/app/config/login/admin/products/product';
@@ -16,26 +17,26 @@ export class AddComponent implements OnInit  {
   form:FormGroup
 
   erroMSG={
-    title:[
-      {type:'required', message:'enter title'}
-    ],
-    price:[{type:'required', message:'enter price'}],
-    description:[{type:'required', message:'enter description'}],
-    categoryId:[{type:'required', message:'enter category'}],
-    images:[{type:'required', message:'enter images'}],
+    title:[{type:'required', message:' Title is required'}],
+    price:[{type:'required', message:' Price is required'}],
+    description:[{type:'required', message:' Description is required'}],
+    categoryId:[{type:'required', message:' Category is required'}],
+    images:[{type:'required', message:' Images is required'}],
   }
+
   constructor( private fb:FormBuilder,private categoriesSRV
-    :CategoriesService, private produtsSRV:ProductService){
+    :CategoriesService, private produtsSRV:ProductService,private activateRout:ActivatedRoute ,private router:Router){
     this.form=this.fb.group({
-      title:[''],
-      price:[],
-      description	:[""],	
-      categoryId:[],
-      images:	[["https://placeimg.com/640/480/any?r=0.9178516507833767"]]	
+      title:['',[Validators.required]],
+      price:['',[Validators.required]],
+      description	:["",[Validators.required]],	
+      categoryId:['', [Validators.required]],
+      images:	[["https://placeimg.com/640/480/any?r=0.9178516507833767"],[Validators.required]]	
     })
   }
   ngOnInit(): void {
     this.getAllDatacategories()
+    this.getEditData()
 
   }
   get title(){
@@ -56,31 +57,51 @@ export class AddComponent implements OnInit  {
   getAllDatacategories(){
     this.categoriesSRV.getAllCategories().subscribe(suc=>{
     this.categoriesArr=suc
-    console.log(this.categoriesArr);
-
     })
   }
   getAllDataProducts(){
     this.produtsSRV.getAllProducts().subscribe(suc=>{
       this.productsARR=suc
-      console.log(this.productsARR);
-  
       })
   }
 
   saveData(){
     debugger
     console.log(this.form.value);
-    this.produtsSRV.postProduct(this.form.value).subscribe(suc=>{
-      console.log(suc);
-      
-
-    },
-    err=>{
-alert('sdgj')
-    })
-
+    const newId=this.activateRout.snapshot.params['id']
+    if(this.form.valid){
+      if(newId){
+        this.produtsSRV.putProduct(newId,this.form.value).subscribe(suc=>{
+          console.log(suc); 
+        })    
+      }else{
+        this.produtsSRV.postProduct(this.form.value).subscribe(suc=>{
+          console.log(suc);
+        },
+        err=>{
+          alert('something wrong')
+        })
+      }
+    }
+    else{
+      this.form.markAllAsTouched();
+      this.form.markAsTouched()
+    }
   }
+
+getEditData(){
+  debugger
+  const newId=this.activateRout.snapshot.params['id']
+  this.produtsSRV.getByIdProduct(newId).subscribe(suc=>{
+    this.form=this.fb.group({
+      title:[suc.title],
+      price:[suc.price],
+      description	:[suc.description],	
+      categoryId:[suc.category?.id],
+      images:	[suc.images]	
+    })
+  })
+}
 
 
 }
