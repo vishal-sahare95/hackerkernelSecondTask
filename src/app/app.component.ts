@@ -6,14 +6,27 @@ import { LoginService } from './config/login/login.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit  {
   title = 'ecomWEb';
   logInValue?:boolean
 constructor(private loginSRV:LoginService,){}
+
   ngOnInit(): void {
     this.loginSRV.islogInValue.subscribe(suc => {
         this.logInValue = suc
+        console.log(this.logInValue);
+        
     })
 }
+ngAfterViewInit(): void{
+  this.loginSRV.islogInValue.subscribe(suc => {
+    this.logInValue = suc
+    console.log(this.logInValue);
+    
+})
+
+}
+
+
 
 }

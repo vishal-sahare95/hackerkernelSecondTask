@@ -73,9 +73,11 @@ export class AddComponent implements OnInit {
             if (newId) {
                 this.produtsSRV.putProduct(newId, this.form.value).subscribe(suc => {
                     console.log(suc);
+                    this.router.navigateByUrl('/product/list')
                 })
             } else {
                 this.produtsSRV.postProduct(this.form.value).subscribe(suc => {
+                    this.router.navigateByUrl('/product/list')
                     console.log(suc);
                 },
                     err => {
@@ -91,15 +93,18 @@ export class AddComponent implements OnInit {
 
     getEditData() {
         const newId = this.activateRout.snapshot.params['id']
-        this.produtsSRV.getByIdProduct(newId).subscribe(suc => {
-            this.form = this.fb.group({
-                title: [suc.title],
-                price: [suc.price],
-                description: [suc.description],
-                categoryId: [suc.category?.id],
-                images: [suc.images]
+        if(newId){
+
+            this.produtsSRV.getByIdProduct(newId).subscribe(suc => {
+                this.form = this.fb.group({
+                    title: [suc.title],
+                    price: [suc.price],
+                    description: [suc.description],
+                    categoryId: [suc.category?.id],
+                    images: [suc.images]
+                })
             })
-        })
+        }
     }
 
 

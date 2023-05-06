@@ -9,8 +9,11 @@ import { LoginService } from '../login/login.service';
 export class OutGuardGuard implements CanActivate {
   constructor(private loginSRV:LoginService,private router:Router){}
   canActivate(){
-    
-    return true;
+    if(this.loginSRV.isLogin()){
+      return true;
+    }
+    this.router.navigateByUrl('/login')
+    return false
   }
   
 }

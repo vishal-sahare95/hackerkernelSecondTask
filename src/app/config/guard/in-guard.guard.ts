@@ -9,8 +9,12 @@ import { LoginService } from '../login/login.service';
 export class InGuardGuard implements CanActivate {
   constructor(private loginSRV:LoginService, private router:Router){}
   canActivate(){
-    
-   return false
+    if (this.loginSRV.isLogin()) {
+      this.router.navigate(['/dashboard'])
+      return false
+  } else {
+      return true
+  }
   }
   
 }

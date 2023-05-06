@@ -17,6 +17,8 @@ export class MenuComponent {
 
       this.loginSRV.islogInValue.subscribe(suc => {
           this.logInValue = suc
+          console.log(this.logInValue);
+          
       })
   }
 
