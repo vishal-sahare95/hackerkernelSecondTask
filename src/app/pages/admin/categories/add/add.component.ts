@@ -54,7 +54,6 @@ export class AddComponent implements OnInit {
                 this.categoriesSRV.putCategories(rid, this.form.value).subscribe(suc => {
                     console.log(suc);
                     this.router.navigateByUrl('categories/list')
-
                 })
             }
             else {

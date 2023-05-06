@@ -24,9 +24,12 @@ export class ListComponent implements OnInit {
   constructor(private ProductSRV: ProductService, private categorySRV: CategoriesService) { }
 
   ngOnInit() {
+    this.getAllProduct()
+
+  }
+  getAllProduct(){
     this.ProductSRV.getAllProducts().subscribe(customers => this.customers = customers);
     this.getFilterData()
-
   }
 
   getFilterData() {
@@ -38,6 +41,12 @@ export class ListComponent implements OnInit {
 
       }
       )
+  }
+  deleteproduct(id:number){
+    this.ProductSRV.deleteProduct(id).subscribe(suc=>{
+      this.getAllProduct()
+    })
+
   }
   valueCheck(id: number | undefined) {
     this.categoryId = id

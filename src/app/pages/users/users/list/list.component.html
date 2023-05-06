@@ -24,19 +24,19 @@
               
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-product let-i="rowIndex">
+        <ng-template pTemplate="body" let-user let-i="rowIndex">
             <tr>
                 
                 <td>{{i+1}}</td>
-                <td>{{product.name}}</td>
-                <td>{{product.avatar}}</td>
-                <td>{{product.email}}</td>
-                <td>{{product.password}}</td>
-                <td>{{product.role}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.avatar}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.password}}</td>
+                <td>{{user.role}}</td>
                 <td > 
                     <div class="d-flex" >
-                         <button class=" btn btn-info" [routerLink]="['/users/',product.id]"> <i class="bi bi-pencil-square"></i></button>
-                         <button class=" btn btn-danger ms-2"> <i class="bi bi-trash"></i></button>
+                         <button class=" btn btn-info" [routerLink]="['/users/',user.id]"> <i class="bi bi-pencil-square"></i></button>
+                         <button class=" btn btn-danger ms-2" (click)="deleteUser(user.id)"> <i class="bi bi-trash"></i></button>
                     </div>
                 </td>
               

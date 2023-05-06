@@ -103,11 +103,16 @@
 <div class="container-fluid page pt-3">
 	<div class="row states">
 		<div class="col-12">
-			<p-table class="data-table" #dt styleClass="p-datatable-gridlines" [value]="CategoriesARR"
-				[paginator]="true" [rows]="5" [resizableColumns]="true" [autoLayout]="true"
-				[showCurrentPageReport]="true"
-				currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-				[rowsPerPageOptions]="[10, 25, 50]" [globalFilterFields]="['name']">
+			<p-table class="data-table"
+			#dt styleClass="p-datatable-gridlines" 
+			[value]="CategoriesARR"
+			[paginator]="true" 
+			[rows]="10" 
+			[showCurrentPageReport]="true"
+			[tableStyle]="{'min-width': '50rem'}"
+			currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+			[rowsPerPageOptions]="[10, 25, 50]" 
+			[globalFilterFields]="['name']">
 				<ng-template pTemplate="caption">
 					<div class="table-header">
 						<div class="title">List of Categories</div>
@@ -118,8 +123,8 @@
 								(input)="dt.filterGlobal($any($event.target).value, 'contains')"
 								placeholder="Search ..." />
 						</div>
-						<div class="action">
-							<a class="btn btn-theam" [routerLink]="['/categories/add']"><i class="ti ti-plus"></i>
+						<div class="action d-flex justify-content-end mt-3">
+							<a class="btn btn-success" [routerLink]="['/categories/add']"><i class="ti ti-plus"></i>
 								Add</a>
 						</div>
 					</div>
@@ -127,14 +132,10 @@
 				<ng-template pTemplate="header">
 					<tr>
 
-						<th class="text-center">Sr.no</th>
-						<th>
-							NAME
-						</th>
-						<th>
-							IMAGE URL
-						</th>
-						<th class="text-center">Action</th>
+						<th class="text-center" style="width:20%">Sr.no</th>
+						<th style="width:20%">NAME</th>
+						<th style="width:20%">IMAGE URL</th>
+						<th class="text-center" style="width:20%">Action</th>
 
 					</tr>
 				</ng-template>
@@ -145,7 +146,7 @@
 
 
 						<td> {{category.name}}</td>
-						<td class="word-wrap col-6"> {{category.image}}</td>
+						<td class=""> {{category.image}}</td>
 						<td class=' d-flex'>
 							<button class="btn btn-info btn-sm"
 								[routerLink]="['/categories/',category.id]">edit</button>

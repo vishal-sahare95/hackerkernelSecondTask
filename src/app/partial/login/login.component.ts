@@ -23,8 +23,8 @@ export class LoginComponent {
   public form: FormGroup;
   constructor(private fb: FormBuilder,private loginSRV:LoginService ,  private router: Router) {
       this.form = this.fb.group({
-          email: ['', [Validators.required]],
-          password: ['', [Validators.required]],
+          email: ['john@mail.com', [Validators.required]],
+          password: ['changeme', [Validators.required]],
       })
     
   }
@@ -41,15 +41,18 @@ export class LoginComponent {
   }
 
   login() {
+    debugger
       if (this.form.valid) {
+        debugger
           this.loginSRV.postUser(this.form.value).subscribe(suc => {
-            console.log(suc.access_token);
+            console.log(suc);
             localStorage.setItem('token', JSON.stringify(suc.access_token));
-            this.router.navigateByUrl('dashboard')
+            
           },
           error=>{
+            debugger
               alert('something wrong')
-              this.form.reset()
+              // this.form.reset()
           }
           )
       }

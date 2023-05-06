@@ -25,5 +25,10 @@ export class ListComponent implements OnInit {
       
     })
   }
+  deleteUser(id:number){
+    this.usserSRV.deleteUser(id).subscribe(suc=>{
+      this.getAllUsers()
+    })
+  }
 
 }
