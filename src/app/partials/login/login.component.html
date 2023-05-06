@@ -1,0 +1,64 @@
+
+<div class="login d-flex justify-content-center align-items-center vh-100">
+    <div class=" card col-6  ">
+        
+        <div class="card-header">
+            <h2 class="text-center">Login page</h2>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="form">
+                <div class="form-group mb-3">
+                    <label for="uid" class="m-2">use id</label>
+                    <input type="text" name="" id="uid" class="form-control" placeholder="" formControlName="username">
+                    <div class="text-danger">
+                        <ng-container *ngFor="let errMSG of errorMSG.username">
+                            <ng-container *ngIf="username?.hasError(errMSG.type) &&(username?.touched || username?.dirty)">
+                                {{errMSG.message}}
+                            </ng-container>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="password" class="m-2">Password</label>
+                    <div class="eye-abs">
+                        <input [type]="isShowPassword?'text':'password'" name=""  id="password" class="form-control" placeholder=""
+                            formControlName="password">
+                            <div class=""></div>
+                            <i class="bi bi-eye-slash-fill eye-icon" (click)="togglePAssword()" *ngIf="!isShowPassword"></i>
+                            <i class="bi bi-eye eye-icon"  (click)="togglePAssword()" *ngIf="isShowPassword"></i>
+                    </div>
+                    <div class="text-danger">
+                        <ng-container *ngFor="let errMSG of errorMSG.password">
+                            <ng-container
+                                *ngIf="password?.hasError(errMSG.type) &&(password?.touched || password?.dirty)">
+                                {{errMSG.message}}
+                            </ng-container>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <button class="btn btn-success" (click)="login()">log in</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+<table>
+    <thead>
+        <tr>
+           
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>   {{userData?.data?.created_at}}</td>
+            <td>   {{userData?.data?.email}}</td>
+        </tr>
+    </tbody>
+</table>
