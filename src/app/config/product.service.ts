@@ -8,7 +8,8 @@ import { Observable } from 'rxjs';
 export class ProductService {
 url=  "https://developer.hackerkernel.com/demo/shreesaidarshan/public/api/product/list"
   constructor(private http:HttpClient) { }
-getfilterdata(page?:number,name?:string,barcode?:number,nature?:any,category?:any, packing_type?:any,inventory_status?:any, get_all_deleted?:any,internal_tag?:any):Observable<any>{
+getfilterdata(page?:number,name?:any,barcode?:number,nature?:any,category?:any, packing_type?:any,limit?:number,inventory_status?:any, get_all_deleted?:any,internal_tag?:any):Observable<any>{
+
   const params:any = {};
   if(page){
     params['page']=page
@@ -28,6 +29,9 @@ getfilterdata(page?:number,name?:string,barcode?:number,nature?:any,category?:an
   if(packing_type){
     params['packing_type']=packing_type
   } 
+  if(limit){
+    params['limit']=limit
+  } 
   if(inventory_status){
     params['inventory_status']=inventory_status
   } 
@@ -40,3 +44,8 @@ getfilterdata(page?:number,name?:string,barcode?:number,nature?:any,category?:an
   return this.http.get<any[]>(this.url, { params });
 }
 }
+
+// getfilterdata(data:any):Observable<any>{
+//   return this.http.get<any>(this.url)
+// }
+// }

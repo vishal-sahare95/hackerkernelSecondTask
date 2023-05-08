@@ -8,8 +8,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import{HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http'
 import { TokenInterceptor } from './config/token.interceptor';
 import { ViewComponent } from './partials/view/view.component';
-import { ProductInterceptor } from './config/product.interceptor';
-import { ProductModule } from './pages/product/product/product.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +19,6 @@ import { ProductModule } from './pages/product/product/product.module';
     AppRoutingModule, 
     ReactiveFormsModule,
     HttpClientModule,
-    ProductModule
     ],
   providers: [
     {
@@ -29,11 +26,7 @@ import { ProductModule } from './pages/product/product/product.module';
       useClass:TokenInterceptor,
       multi:true
     },
-    {
-      provide:HTTP_INTERCEPTORS,
-      useClass:ProductInterceptor,
-      multi:true
-    }
+   
   ],
   bootstrap: [AppComponent]
 })

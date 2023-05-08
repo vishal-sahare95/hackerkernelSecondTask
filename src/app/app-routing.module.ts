@@ -2,16 +2,26 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './partials/login/login.component';
 import { ViewComponent } from './partials/view/view.component';
+import { InGuard } from './config/in.guard';
+import { OutGuard } from './config/out.guard';
 
 const routes: Routes = [
   {
     path:'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate:[InGuard]
   },
   {
     path:'view',
-    component: ViewComponent
+    component: ViewComponent,
+    
   },
+  {
+    path:'products',
+    loadChildren:()=>import('./pages/products/products/products.module').then(m=>m.ProductsModule),
+    canActivate:[OutGuard]
+  }
+ 
 ];
 
 @NgModule({

@@ -1,0 +1,52 @@
+<div class="container " style="border: 1px solid black;">
+    <div class="">
+    <input type="text" [(ngModel)]="name" > 
+    <button (click)="seachName(name)">search</button>
+</div>
+
+
+
+    <table class="table table-striped table-bordered mt-4 ">
+        <thead class="table-dark bg-dark" >
+            <th>sr no </th>
+            <th>product name</th>
+            <th>product deta</th>
+            <th>product category</th>
+        </thead>
+        <thead class="table-striped">
+            <tr *ngFor="let item of productARR ; let i=index">
+                <td> {{i+1}} </td>
+                <td> {{item.product_name}} </td>
+                <td> {{item.product_detail}} </td>
+                <td>{{item.categorydetails?.name}}</td>
+            </tr>
+        </thead>
+
+    </table>
+    <div class=" d-flex justify-content-end ">
+        <div class="">
+            <select name="" id="" [(ngModel)]="limit" (change)="filterProductData()">
+                <option [value]="10">10</option>
+                <option [value]="20">20</option>
+                <option [value]="30">30</option>
+                <option [value]="50">50</option>
+                <option [value]="100">100</option>
+                <option [value]="1000">1000</option>
+            </select>
+        </div>
+        {{page}}
+        <nav aria-label="" class="ms-3">
+            <ul class="pagination">
+                <li class="page-item ">
+                    <span class="page-link" (click)="decrement()">Previous</span>
+                </li>
+                <li class="page-item"><a class="page-link" (click)="pageValue(page+0)">{{page+0}}</a></li>
+                <li class="page-item"><a class="page-link" (click)="pageValue(page+1)">{{page+1}}</a></li>
+                <li class="page-item"><a class="page-link" (click)="pageValue(page+2)">{{page+2}}</a></li>
+                <li class="page-item">
+                    <a class="page-link" (click)="increment()">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
