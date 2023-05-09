@@ -16,6 +16,11 @@ const routes: Routes = [
     path:':id',
     component:AddComponent
   },
+  {
+    path:'',
+    pathMatch:"full",
+    redirectTo:'/list'
+  },
 ];
 
 @NgModule({

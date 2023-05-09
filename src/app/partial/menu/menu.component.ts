@@ -14,7 +14,6 @@ export class MenuComponent {
 
   }
   ngOnInit(): void {
-
       this.loginSRV.islogInValue.subscribe(suc => {
           this.logInValue = suc
           console.log(this.logInValue);

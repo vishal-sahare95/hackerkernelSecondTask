@@ -30,14 +30,14 @@ import { InterceptorInterceptor } from './config/interceptor.interceptor';
     CategoriesModule,
     MatCardModule,
     NgbModule,
-    ChipsModule
+    ChipsModule,
   ],
   providers: [
-    // {
-    //   provide:HTTP_INTERCEPTORS,
-    //   useClass:InterceptorInterceptor,
-    //   multi:true
-    // }
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass:InterceptorInterceptor,
+      multi:true
+    }
   ],
   bootstrap: [AppComponent]
 })

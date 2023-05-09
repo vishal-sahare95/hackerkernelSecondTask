@@ -37,6 +37,8 @@ export class AddComponent implements OnInit {
     ngOnInit(): void {
         this.getAllDatacategories()
         this.getEditData()
+        console.log('this i category');
+        
 
     }
     get title() {
@@ -93,7 +95,7 @@ export class AddComponent implements OnInit {
 
     getEditData() {
         const newId = this.activateRout.snapshot.params['id']
-        if(newId){
+        if (newId) {
 
             this.produtsSRV.getByIdProduct(newId).subscribe(suc => {
                 this.form = this.fb.group({

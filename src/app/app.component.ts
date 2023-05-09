@@ -18,14 +18,7 @@ constructor(private loginSRV:LoginService,){}
         
     })
 }
-ngAfterViewInit(): void{
-  this.loginSRV.islogInValue.subscribe(suc => {
-    this.logInValue = suc
-    console.log(this.logInValue);
-    
-})
 
-}
 
 
 

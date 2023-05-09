@@ -19,7 +19,7 @@ export class LoginService {
     return this.http.post<LoginC>(`${this.url}`, data)
   }
   isLogin(){
-   return !! (localStorage.getItem('token'))
+   return !! localStorage.getItem('token')
   }
   getUserProfile():Observable<Login[]>{
     return this.http.get<Login[]>(this.userurl)
