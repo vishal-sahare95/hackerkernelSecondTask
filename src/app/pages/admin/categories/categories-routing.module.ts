@@ -16,11 +16,26 @@ const routes: Routes = [
     path:':id',
     component:AddComponent
   },
-  {
-    path:'',
-    pathMatch:"full",
-    redirectTo:'/list'
-  },
+  // {
+  //   path:'categories', 
+   
+   
+  //   children: [
+  //     {
+  //       path:'add',
+  //       component:AddComponent
+  //     },
+  //     {
+  //       path:'list',
+  //       component:ListComponent
+  //     },
+  //     {
+  //       path:':id',
+  //       component:AddComponent
+  //     },
+  //   ]
+  // },
+
 ];
 
 @NgModule({

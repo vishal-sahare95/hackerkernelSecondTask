@@ -76,7 +76,12 @@ export class AddComponent implements OnInit {
                 this.produtsSRV.putProduct(newId, this.form.value).subscribe(suc => {
                     console.log(suc);
                     this.router.navigateByUrl('/product/list')
-                })
+                },
+                (err)=>{
+                   console.log(err);
+                   
+                }
+                )
             } else {
                 this.produtsSRV.postProduct(this.form.value).subscribe(suc => {
                     this.router.navigateByUrl('/product/list')

@@ -8,6 +8,11 @@ import { MenuComponent } from "./partial/menu/menu.component";
 
 const routes: Routes = [
   {
+    path:'',
+    redirectTo:'login',
+    pathMatch:'full' 
+  },
+  {
     path:'login',
     component:LoginComponent,
     canActivate:[InGuardGuard]
