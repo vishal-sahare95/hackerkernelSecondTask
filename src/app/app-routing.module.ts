@@ -7,6 +7,11 @@ import { OutGuard } from './config/out.guard';
 
 const routes: Routes = [
   {
+    path :'',
+    redirectTo:'login',
+    pathMatch:'full'
+  },
+  {
     path:'login',
     component: LoginComponent,
     canActivate:[InGuard]

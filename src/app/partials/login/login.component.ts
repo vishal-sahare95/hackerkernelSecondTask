@@ -42,19 +42,17 @@ export class LoginComponent implements AfterViewInit {
     }
     login() {
         this.loginSRV.post(this.form.value)
-        .subscribe(suc => {
-            debugger
-            localStorage.setItem('token', JSON.stringify(suc.data.api_token))
-            // localStorage.setItem('data', JSON.stringify(suc))
-            this.userData = suc
-            console.log(this.userData);
-            alert(suc.message)
-            this.router.navigateByUrl('/products/list')
-        },
-            (error) => {
-                alert('something11 wrong')
-            }
-        )
+            .subscribe(suc => {
+                localStorage.setItem('token', JSON.stringify(suc.data.api_token))
+                this.userData = suc
+                console.log(this.userData);
+                alert(suc.message)
+                this.router.navigateByUrl('/products/list')
+            },
+                (error) => {
+                    alert('something11 wrong')
+                }
+            )
     }
     togglePAssword() {
         this.isShowPassword = !this.isShowPassword;

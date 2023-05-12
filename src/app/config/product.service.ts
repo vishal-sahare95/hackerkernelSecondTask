@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ProductService {
-url=  "https://developer.hackerkernel.com/demo/shreesaidarshan/public/api/product/list"
+  
+url=  "https://developer.hackerkernel.com/demo/shree-sai-darshan-backend/public/api/product/list"
   constructor(private http:HttpClient) { }
 getfilterdata(page?:number,name?:any,barcode?:number,nature?:any,category?:any, packing_type?:any,limit?:number,inventory_status?:any, get_all_deleted?:any,internal_tag?:any):Observable<any>{
 
@@ -45,7 +46,3 @@ getfilterdata(page?:number,name?:any,barcode?:number,nature?:any,category?:any, 
 }
 }
 
-// getfilterdata(data:any):Observable<any>{
-//   return this.http.get<any>(this.url)
-// }
-// }

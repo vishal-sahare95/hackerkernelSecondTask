@@ -1,3 +1,7 @@
+
+<div class=" d-flex justify-content-end">
+    <button class="btn btn-danger m-3" (click)="logOut()"> log out</button>
+</div>
 <div class="container " style="border: 1px solid black;">
     <div class="">
     <input type="text" [(ngModel)]="name" > 
@@ -14,7 +18,7 @@
             <th>product category</th>
         </thead>
         <thead class="table-striped">
-            <tr *ngFor="let item of productARR ; let i=index">
+            <tr *ngFor="let item of productARR ; let i=index;" >
                 <td> {{i+1}} </td>
                 <td> {{item.product_name}} </td>
                 <td> {{item.product_detail}} </td>
@@ -31,20 +35,23 @@
                 <option [value]="30">30</option>
                 <option [value]="50">50</option>
                 <option [value]="100">100</option>
-                <option [value]="1000">1000</option>
+                <option [value]="last-100" *ngIf="last>110">{{last-100}}</option>
+                <option [value]="last" *ngIf="last>110">{{last}}</option>
             </select>
         </div>
-        {{page}}
-        <nav aria-label="" class="ms-3">
+        <nav aria-label="" class="ms-3" >
+           last page  {{lastPage}}
+          page  {{page}}
             <ul class="pagination">
                 <li class="page-item ">
-                    <span class="page-link" (click)="decrement()">Previous</span>
+                    <span class="page-link" (click)="decrement()"  >Previous</span>
                 </li>
-                <li class="page-item"><a class="page-link" (click)="pageValue(page+0)">{{page+0}}</a></li>
-                <li class="page-item"><a class="page-link" (click)="pageValue(page+1)">{{page+1}}</a></li>
-                <li class="page-item"><a class="page-link" (click)="pageValue(page+2)">{{page+2}}</a></li>
+                <li class="page-item"><a class="page-link" (click)="pageValue(page+0)" *ngIf="page<lastPage " >{{page+0}}</a></li>
+                <li class="page-item"><a class="page-link" (click)="pageValue(page+1)" *ngIf="page<lastPage" >{{page+1}}</a></li>
+                <li class="page-item"><a class="page-link" (click)="pageValue(page+2)" *ngIf="page<=lastPage-2" >{{page+2}}</a></li>
+                <li class="page-item" *ngIf="last===to"><a class="page-link" > 1</a></li>
                 <li class="page-item">
-                    <a class="page-link" (click)="increment()">Next</a>
+                    <a class="page-link" (click)="increment()"  >Next</a>
                 </li>
             </ul>
         </nav>

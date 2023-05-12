@@ -7,11 +7,12 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { LoginService } from './login/login.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
   
-    constructor(private logimnSRV: LoginService) { }
+    constructor(private logimnSRV: LoginService, private router :Router) { }
 
     intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
         if (!request.url.includes('user-login-v2')) {
@@ -21,8 +22,11 @@ export class TokenInterceptor implements HttpInterceptor {
             });
             return next.handle(headerToken);
         }
+        this.router.navigateByUrl('login')
         return next.handle(request);
     }
+
+    
 
 
 }

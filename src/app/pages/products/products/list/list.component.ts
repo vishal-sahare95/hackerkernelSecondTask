@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoginService } from 'src/app/config/login/login.service';
 import { ProductService } from 'src/app/config/product.service';
 
 @Component({
@@ -18,21 +20,11 @@ export class ListComponent implements OnInit {
   public inventory_status: any
   public get_all_deleted: any
   public internal_tag: any
+  public lastPage?:any
+  public to?:any
+public last?:any
 
-  // filterObj = {
-  //   page: 1,
-  //   name: '',
-  //   barcode: '',
-  //   nature: '',
-  //   category: '',
-  //   packing_type: '',
-  //   limit: 10,
-  //   inventory_status: '',
-  //   get_all_deleted: '',
-  //   internal_tag: '',
-
-  // }
-  constructor(private productSRV: ProductService) { }
+  constructor(private productSRV: ProductService,private router :Router) { }
 
   ngOnInit(): void {
     this.filterProductData()
@@ -48,16 +40,30 @@ export class ListComponent implements OnInit {
        
       console.log(this.productARR.length)
       console.log(suc.data.data.length)
+      this.lastPage=suc.data.last_page
+      this.last=suc.data.total
+      this.to=suc.data.to
+      console.log(this.lastPage);
+      
       })
   }
 
   increment(){
+    if(this.last){
+      if(this.page < this.lastPage){
     this.page =this.page +1
     this.filterProductData()
+    }
+    }
+    
+
   }
   decrement(){
-    this.page =this.page -1
+    
+    if(this.page>1){
+      this.page =this.page -1
     this.filterProductData()
+    }
 
   }
   pageValue(no:number){
@@ -67,7 +73,19 @@ console.log(this.page);
 this.filterProductData()
   }
   seachName(name:string){
-    this.name=name
+    this.name=(name && name.trim())
     this.filterProductData()
+  }
+
+  logOut(){
+   localStorage.clear()
+   this.router.navigateByUrl('login')
+
+  }
+
+  trackByproductData(index:number , product:any):string{
+    console.log(product);
+    
+    return product.product_name
   }
 }
