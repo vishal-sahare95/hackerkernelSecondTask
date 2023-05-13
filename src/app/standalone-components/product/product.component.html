@@ -1,0 +1,22 @@
+<p>product works!</p>
+<div class="table-responsive table table-striped table-bordered mt-4">
+    <table class="table table-primary">
+        <thead>
+            <tr>
+                <th scope="col">sr no</th>
+                <th scope="col">name</th>
+                <th scope="col">name</th>
+            </tr>
+        </thead>
+        <tbody>
+          
+            <tr *ngFor="let product of productData; let i=index">
+                <td >{{i+1}}</td>
+                <td>{{product.category.name}}</td>
+                <td>
+                    <img ngSrc="{{product.images}}" width="50" height="50" > </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
