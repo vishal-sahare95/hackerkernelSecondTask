@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component,OnInit, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReusableTableComponent } from '../reusable-table/reusable-table.component';
 import { CategiriesService } from 'src/app/config/categiries.service';
@@ -9,7 +9,8 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [CommonModule,ReusableTableComponent],
   templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.css']
+  styleUrls: ['./categories.component.css'],
+  encapsulation: ViewEncapsulation.Emulated
 })
 export class CategoriesComponent {
 public categoriesData:any[]=[]
