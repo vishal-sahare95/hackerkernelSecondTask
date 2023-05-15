@@ -1,0 +1,75 @@
+
+
+<div class="d-flex justify-content-center mt-5">
+    <div class="card col-md-8 col-12  ">
+      <div class="card-header text-center">
+        <h1>
+          {{isSnapShotID?'Edit': 'Add'}} product
+        </h1>
+      </div>
+
+      <div class="card-body p-5 pt-3">
+        <form [formGroup]="form">
+           <div class="form-group mt-3">
+                <label for="name">product title</label>
+                <input type="text"  class="form-control" id="name" formControlName="title">
+                <div class="text-danger">
+                  <ng-container *ngFor="let error of erroMSG.title">
+                    <ng-container *ngIf="title?.hasError(error.type) && (title?.dirty || title?.touched)">
+                      {{error.message}}
+                    </ng-container>
+                  </ng-container>
+                </div>
+      
+              </div>
+              <div class="form-group mt-3">
+                <label for="image">product price</label>
+                <input type="text"  class="form-control"id="image" formControlName="price">
+                <div class="text-danger">
+                  <ng-container *ngFor="let error of erroMSG.price; ">
+                    <ng-container *ngIf="price?.hasError(error.type) && (price?.touched || price?.dirty)">
+                      {{error.message}}
+                    </ng-container>
+                  </ng-container>
+                </div>
+              </div>
+              <div class="form-group mt-3">
+                <label for="description">product description</label>
+                <input type="text"  class="form-control"id="description" formControlName="description">
+                <div class="text-danger">
+                  <ng-container *ngFor="let error of erroMSG.description; ">
+                    <ng-container *ngIf="description?.hasError(error.type) && (description?.touched || description?.dirty)">
+                      {{error.message}}
+                    </ng-container>
+                  </ng-container>
+                </div>
+              </div>
+              <div class="form-group mt-3">
+                <label for="category">product category</label>
+               <select name="" id="" class="form-control" formControlName="categoryId">
+                <option [value]="category.id"  *ngFor=" let category of categoriesArr">{{category.name}}</option>
+               </select>
+               <div class="text-danger">
+                <ng-container *ngFor="let error of erroMSG.categoryId; ">
+                  <ng-container *ngIf="categoryId?.hasError(error.type) && (categoryId?.touched || categoryId?.dirty)">
+                    {{error.message}}
+                  </ng-container>
+                </ng-container>
+              </div>
+              </div>
+              <div class="form-group mt-3">
+                <label for="images">product images</label>
+                <input type="text"  class="form-control"id="images" formControlName="images">
+                <div class="text-danger">
+                  <ng-container *ngFor="let error of erroMSG.images; ">
+                    <ng-container *ngIf="images?.hasError(error.type) && (images?.touched || images?.dirty)">
+                      {{error.message}}
+                    </ng-container>
+                  </ng-container>
+                </div>
+              </div>
+              <button class="btn btn-success mt-5" (click)="saveData()"> {{isSnapShotID?'Edit': 'Save'}} </button>
+        </form>
+      </div>
+    </div>  
+</div>

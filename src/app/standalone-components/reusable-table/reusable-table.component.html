@@ -1,0 +1,35 @@
+
+<div class="container table-container">
+    <table class="table  table-bordered mt-4">
+    <thead class=" table-primary">
+        <tr>
+            <th>sr no</th>
+            <th *ngFor=" let item of headerList">{{item.head }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of bodyList; let i=index" trackBy="trackByFn">
+            <td style="width: 5%;">{{i+1}}</td>
+            <td *ngFor=" let item of headerList" style="width: 10%;">
+                <div class="" *ngIf="item.field !=='' ">
+                    <div class="" *ngIf=" item.field!='image'" >
+                         {{ data[item.field] || data?.category[item.field] }}
+                    </div>
+                   
+                   
+                </div>
+                <div class="" *ngIf=" item.field=='image'" >
+                    <img ngSrc="{{data[item.field] || data?.category[item.field]}}" alt=""  width="100" height="100">
+
+                </div>
+                <div class="" *ngIf="item.field ==''" style="width: 5%;">
+                    <div class="d-flex">
+                        <button class="btn btn-info" (click)="edit(data)">edit </button>
+                        <button class="btn btn-danger ms-2" (click)="delete(data.id)">delete</button>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>

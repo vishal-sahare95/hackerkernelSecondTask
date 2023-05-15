@@ -1,4 +1,4 @@
-<p>product works!</p>
+<!-- <p>product works!</p>
 <div class="table-responsive table table-striped table-bordered mt-4">
     <table class="table table-primary">
         <thead>
@@ -18,5 +18,12 @@
             </tr>
         </tbody>
     </table>
+</div> -->
+
+<p class="text-center">product works!</p>
+<div class="">
+ 
+    <app-reusable-table  [headerList]="list" [bodyList]="productData" (onEdit)="editUser($event)" (ondelete)="deleteUser($event)"></app-reusable-table>
 </div>
+
 
