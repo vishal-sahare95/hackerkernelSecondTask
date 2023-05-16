@@ -18,6 +18,8 @@ export class ReusableTableComponent implements OnInit {
   @Output() Onlist = new EventEmitter()
   @Output() OnstartList = new EventEmitter()
   @Output() OnPage = new EventEmitter()
+
+  @Input()isvisiblePagination?:boolean=true//for hide show pagination
   startlist: number = 0
   list: number = 10
   page: number = 1
@@ -66,7 +68,6 @@ this.pageValue(1)
     this.OnstartList.emit(this.startlist)
     
   }
-
 
 
 }

@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 })
 export class CategoriesComponent {
 public categoriesData:any[]=[]
+public isVisible=false
   list:any[]=[
     {'head':'category name', 'field':'name'},
     {'head':'img url', 'field':'image'},

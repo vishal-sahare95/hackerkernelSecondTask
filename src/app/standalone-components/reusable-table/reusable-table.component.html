@@ -1,7 +1,7 @@
 <div class="container table-container">
     <!-- ========= -->
     <!-- {{list}} -->
-    <div class="d-flex justify-content-end">
+    <div class="d-flex justify-content-end" *ngIf="isvisiblePagination">
 
         <div class="me-4">
             <select class="form-select"  name="" [(ngModel)]="list" (change)="selectedList(list)">

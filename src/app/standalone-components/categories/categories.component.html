@@ -1,6 +1,6 @@
 <p>categories works!</p>
     <app-reusable-table 
-         
+    [isvisiblePagination]='isVisible'
         [headerList]="list" 
         [bodyList]="categoriesData"  
         (onEdit)="edit($event)" 
