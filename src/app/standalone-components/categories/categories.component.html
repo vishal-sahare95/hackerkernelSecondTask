@@ -1,4 +1,7 @@
-<p>categories works!</p>
+
+<div class="card">
+    <h1 class="text-center mt-3">category data</h1>
+    <div class="d-flex justify-content-end"> <button class=" btn btn-info me-5" (click)="redirectToAddPage()">Add</button> </div>
     <app-reusable-table 
     [isvisiblePagination]='isVisible'
         [headerList]="list" 
@@ -7,3 +10,5 @@
         (ondelete)="delete($event)" 
         >
     </app-reusable-table>
+</div>
+    

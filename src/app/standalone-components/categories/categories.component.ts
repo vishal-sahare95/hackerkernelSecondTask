@@ -22,6 +22,9 @@ public isVisible=false
   ]
   constructor(private categoriesSRV:CategiriesService, private router:Router){}
   ngOnInit():void{
+    this.getAllCategory()
+  }
+  getAllCategory(){
     this.categoriesSRV.getCategories().subscribe((suc:any)=>{
       console.log(suc);
       this.categoriesData=suc
@@ -33,9 +36,10 @@ public isVisible=false
     )
   }
   delete(item:any){
-    
-    this.categoriesSRV.deleteCategories(item.id).subscribe(suc=>{
+    debugger
+    this.categoriesSRV.deleteCategories(item).subscribe(suc=>{
       console.log(suc);
+      this.getAllCategory()
       
     },(error)=>console.log('something wrong')
     
@@ -45,6 +49,9 @@ public isVisible=false
   edit(item:any){
 this.router.navigateByUrl('category/'+item.id)
     console.log(item);
+  }
+  redirectToAddPage(){
+    this.router.navigateByUrl('/category/add')
   }
 
 }
