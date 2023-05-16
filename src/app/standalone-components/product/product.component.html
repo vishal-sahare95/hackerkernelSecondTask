@@ -22,8 +22,24 @@
 
 <p class="text-center">product works!</p>
 <div class="">
- 
-    <app-reusable-table  [headerList]="list" [bodyList]="productData" (onEdit)="editUser($event)" (ondelete)="deleteUser($event)"></app-reusable-table>
+ <!-- [allheaderList]===for All data ,
+     [headerList]=for thew header titlet print,
+     [bodyList]==for the body data printing where limit is present,
+    (onEdit)=for edit purpose,
+     (ondelete)=for delete ,
+      (Onlist)=for no. of item show in a table -for selecting selectbox no,
+        (OnPage)=for page no 
+-->
+    <app-reusable-table
+        [allheaderList]="listData" 
+        [headerList]="list"
+        [bodyList]="data" 
+        (onEdit)="editUser($event)" 
+        (ondelete)="deleteUser($event)" 
+        (OnstartList)="selectedStartList($event)" 
+        (Onlist)="selectedlist($event)" 
+        >
+    </app-reusable-table>
 </div>
 
 
