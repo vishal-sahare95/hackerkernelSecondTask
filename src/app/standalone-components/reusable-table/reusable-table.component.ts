@@ -25,11 +25,6 @@ export class ReusableTableComponent implements OnInit {
   //  @Input() isAction:boolean=false;
   ngOnInit(): void {
     this.selectedList(this.list)
-    console.log('56546');
-    console.log(this.allheaderList);
-
-
-
   }
   edit(it: any) {
 
@@ -47,34 +42,22 @@ export class ReusableTableComponent implements OnInit {
     this.Onlist.emit(num)
 this.pageValue(1)
   }
-  // selectedStartList(num:number){
-  //   console.log(num);
-  //   this.OnstartList.emit(num)
-
-  // }
-
 
   decrement() {
     if (this.page > 1) {
       this.page = this.page - 1
       this.pageValue(this.page)
-    }
-   
+    } 
   }
+
   increment() {
     if (this.pageCounter !==this.page) {
       this.page = this.page + 1
       this.pageValue(this.page)
     }
-    // if (this.startlist <=this.allheaderList.length) {
-    //   this.page = this.page + 1
-    //   this.pageValue(this.page)
-    // }
-
   }
 
   pageValue(no: number) {
-
     this.startlist = (no * this.list) - this.list + 1
     this.page = no
     console.log(this.page);
