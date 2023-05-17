@@ -13,11 +13,15 @@ constructor(private loginSRV:LoginService,){}
 
   ngOnInit(): void {
     this.loginSRV.islogInValue.subscribe(suc => {
+      console.log(this.logInValue);
         this.logInValue = suc
         console.log(this.logInValue);
         
-    })
+    },
+    error=>console.log('something wrong')
+    )
 }
+
 
 
 

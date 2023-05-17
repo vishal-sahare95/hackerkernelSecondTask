@@ -9,7 +9,6 @@ import { Login, LoginC } from './login';
 export class LoginService {
   islogInValue=new BehaviorSubject(this.isLogin())
   url="https://api.escuelajs.co/api/v1/auth/login"
-  userurl="https://api.escuelajs.co/api/v1/auth/profile"
   constructor(private http:HttpClient) { }
 
   getUser():Observable<Login[]>{
@@ -21,8 +20,6 @@ export class LoginService {
   isLogin(){
    return !! localStorage.getItem('token')
   }
-  getUserProfile():Observable<Login[]>{
-    return this.http.get<Login[]>(this.userurl)
-  }
+
 
 }

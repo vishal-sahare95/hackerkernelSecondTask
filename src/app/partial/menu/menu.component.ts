@@ -15,12 +15,14 @@ export class MenuComponent {
   }
   ngOnInit(): void {
       this.loginSRV.islogInValue.subscribe(suc => {
+        console.log(this.logInValue);
+        
           this.logInValue = suc
           console.log(this.logInValue);
-          
       })
   }
 
+  
   logOut() {
       this.loginSRV.islogInValue.next(false)
       localStorage.setItem('token', '');

@@ -31,7 +31,8 @@ import {ButtonModule} from 'primeng/button';
     DropdownModule,
     SliderModule,
     ButtonModule,
-    FormsModule
+    FormsModule,
+    
   ]
 })
 export class ProductsModule { }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Categories } from 'src/app/config/login/admin/categories/categories';
 import { CategoriesService } from 'src/app/config/login/admin/categories/categories.service';
 import { Product } from 'src/app/config/login/admin/products/product';
@@ -14,7 +15,8 @@ import { ProductService } from 'src/app/config/login/admin/products/product.serv
 export class AddComponent implements OnInit {
     public categoriesArr: Categories[] = []
     public productsARR: Product[] = []
-    form: FormGroup
+    public isSnapshotId?:number
+    public form: FormGroup
 
     erroMSG = {
         title: [{ type: 'required', message: ' Title is required' }],
@@ -25,7 +27,7 @@ export class AddComponent implements OnInit {
     }
 
     constructor(private fb: FormBuilder, private categoriesSRV
-        : CategoriesService, private produtsSRV: ProductService, private activateRout: ActivatedRoute, private router: Router) {
+        : CategoriesService, private produtsSRV: ProductService, private activateRout: ActivatedRoute, private router: Router,private toastr: ToastrService) {
         this.form = this.fb.group({
             title: ['', [Validators.required]],
             price: ['', [Validators.required]],
@@ -38,7 +40,7 @@ export class AddComponent implements OnInit {
         this.getAllDatacategories()
         this.getEditData()
         console.log('this i category');
-        
+        this.isSnapshotId=this.activateRout.snapshot.params['id']
 
     }
     get title() {
@@ -70,24 +72,30 @@ export class AddComponent implements OnInit {
     saveData() {
         debugger
         console.log(this.form.value);
-        const newId = this.activateRout.snapshot.params['id']
+        
         if (this.form.valid) {
-            if (newId) {
-                this.produtsSRV.putProduct(newId, this.form.value).subscribe(suc => {
+            if (this.isSnapshotId) {
+                this.produtsSRV.putProduct(this.isSnapshotId, this.form.value).subscribe(suc => {
+                    this.toastr.success('Data add successfully', 'Done');
                     console.log(suc);
                     this.router.navigateByUrl('/product/list')
                 },
                 (err)=>{
+                    
+                    this.toastr.error('Something wrong', 'Sorry');
                    console.log(err);
                    
                 }
                 )
             } else {
                 this.produtsSRV.postProduct(this.form.value).subscribe(suc => {
+                    
+                    this.toastr.success('Data edit successfully', 'Done');
                     this.router.navigateByUrl('/product/list')
                     console.log(suc);
                 },
                     err => {
+                        this.toastr.error('Something wrong', 'Sorry');
                         alert('something wrong')
                     })
             }
@@ -110,6 +118,11 @@ export class AddComponent implements OnInit {
                     categoryId: [suc.category?.id],
                     images: [suc.images]
                 })
+            },
+            (error)=>{
+                this.toastr.error('Something wrong', 'Sorry');
+              console.log('something wrong');
+              
             })
         }
     }

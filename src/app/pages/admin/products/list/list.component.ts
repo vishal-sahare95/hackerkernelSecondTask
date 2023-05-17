@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { LazyLoadEvent } from 'primeng/api';
 import { CategoriesService } from 'src/app/config/login/admin/categories/categories.service';
 import { Product } from 'src/app/config/login/admin/products/product';
@@ -21,7 +22,7 @@ export class ListComponent implements OnInit {
   price_max?: number
   categoryId?: number
   isShowFilter: boolean = false
-  constructor(private ProductSRV: ProductService, private categorySRV: CategoriesService) { }
+  constructor(private ProductSRV: ProductService, private categorySRV: CategoriesService,private toastr: ToastrService) { }
 
   ngOnInit() {
     this.getAllProduct()
@@ -33,18 +34,29 @@ export class ListComponent implements OnInit {
   }
 
   getFilterData() {
-    this.ProductSRV.getFilterProducts(this.productTitle, this.price_min, this.price_max, this.categoryId,)
+    this.ProductSRV.getFilterProducts(this.productTitle, this.price_min, this.price_max, this.categoryId)
       .subscribe(products => {
+        this.toastr.success('Filter data successfully', 'Done');
         this.customers = products
         console.log(products);
         console.log(this.customers);
 
+      },
+      (error)=>{
+        this.toastr.error('Something wrong', 'sorry');
+        
       }
       )
   }
   deleteproduct(id:number){
     this.ProductSRV.deleteProduct(id).subscribe(suc=>{
+      
+      this.toastr.success('Delete data successfully', 'Done');
       this.getAllProduct()
+    },
+    (error)=>{
+      this.toastr.error('Something wrong', 'sorry');
+      
     })
 
   }

@@ -12,7 +12,8 @@ import { UsersService } from 'src/app/config/users/users.service';
 export class AddComponent implements OnInit {
   public usersArr: Users[] = []
   public form: FormGroup;
-  public isEditFieldHide?:boolean
+  public isEditFieldHide?:boolean;
+  public snapshotID?:number
   public errorMSG = {
     email: [{ type: 'required', message: 'Email is required' }],
     password: [{ type: 'required', message: 'password is required' }],
@@ -41,6 +42,9 @@ export class AddComponent implements OnInit {
 
   ngOnInit(): void {
     this.getBYIDData()
+    this.snapshotID= this.activateRout.snapshot.params['id']
+    console.log(this.snapshotID);
+    
   }
 
   get email() {
@@ -57,18 +61,28 @@ export class AddComponent implements OnInit {
   }
   saveData() {
     if (this.form.valid) {
-      const newId = this.activateRout.snapshot.params['id']
-      if (newId) {
-        this.usersSRV.putUsers(newId, this.form.value).subscribe(suc => {
+      if (this.snapshotID) {
+        this.usersSRV.putUsers(this.snapshotID, this.form.value).subscribe(suc => {
           console.log(suc);
-        })
+          this.router.navigateByUrl('users/list')
+        },
+        (error)=>{
+          console.log('something wrong');
+          
+        }
+        )
       }
       else {
         console.log(this.isEditFieldHide);
-        this.isEditFieldHide=false
+        this.isEditFieldHide=false;
         this.usersSRV.postUsers(this.form.value).subscribe(suc => {
           console.log(suc);
+          
           this.router.navigateByUrl('users/list')
+        },
+        (error)=>{
+          console.log('something wrong');
+          
         })
       }
     }
@@ -80,7 +94,10 @@ export class AddComponent implements OnInit {
 
   getBYIDData() {
     const newId = this.activateRout.snapshot.params['id']
+    console.log(newId);
+    
     if(newId){
+
       this.usersSRV.getByIDUsers(newId).subscribe(suc => {
       console.log(suc);
       this.isEditFieldHide=true
@@ -89,6 +106,10 @@ export class AddComponent implements OnInit {
         email: [suc.email],
         password: [suc.password],
       })
+    },
+    (error)=>{
+      console.log('something wrong');
+      
     })
     }
     

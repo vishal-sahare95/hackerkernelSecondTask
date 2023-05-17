@@ -23,11 +23,19 @@ export class ListComponent implements OnInit {
       console.log(suc);
       console.log(this.usersARR);
       
+    },
+    (error)=>{
+      console.log('something wrong');
+      
     })
   }
   deleteUser(id:number){
     this.usserSRV.deleteUser(id).subscribe(suc=>{
       this.getAllUsers()
+    },
+    (error)=>{
+      console.log('something wrong');
+      
     })
   }
 

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { LoginService } from 'src/app/config/login/login.service';
 
 @Component({
@@ -21,9 +22,9 @@ export class LoginComponent {
 
   
   public form: FormGroup;
-  constructor(private fb: FormBuilder,private loginSRV:LoginService ,  private router: Router) {
+  constructor(private fb: FormBuilder,private loginSRV:LoginService ,  private router: Router,private toastr: ToastrService) {
       this.form = this.fb.group({
-          email: ['', [Validators.required]],
+          email: ['', [Validators.required]], 
           password: ['', [Validators.required]],
       })
     
@@ -44,10 +45,13 @@ export class LoginComponent {
       if (this.form.valid) {
           this.loginSRV.postUser(this.form.value).subscribe(suc => {
             console.log(suc);
+            this.toastr.success('login successfully', 'Done');
             localStorage.setItem('token', JSON.stringify(suc.access_token));
-            this.router.navigateByUrl('dashboard')
+            this.router.navigateByUrl('categories/list')
           },
           error=>{
+            
+            this.toastr.error('check user Id or password', 'Wrong credential');
               alert('something wrong')
               this.form.reset()
           }

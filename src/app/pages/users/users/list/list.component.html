@@ -1,17 +1,18 @@
 <div class="product  container">
-    <div class="mt-5 mb-5 text-center fs-1 fw-bold"> user data  </div>
+    <div class="mt-5 mb-5 text-center fs-1 fw-bold">user data  </div>
     
     <p-table #dt class="card" [value]="usersARR" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" [tableStyle]="{'min-width': '50rem'}"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]" [globalFilterFields]="['title','description']">
         
         <ng-template pTemplate="caption">
+            <div class=" d-flex justify-content-end mb-5"><button class="btn btn-success" [routerLink]="['/users/add']">Add user</button></div>
             <div class=" search d-flex justify-content-end">
               <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
               <input type="text" class="form-control" pInputText size="50" placeholder="Global Filter"
                 (input)="dt.filterGlobal($any($event.target).value, 'contains')" style="width:auto">
             </div>
           </ng-template>
-     ,KDFNDSKJFH
+  
         <ng-template pTemplate="header">
             <tr>
                 <th style="width:25%">SR NO</th>

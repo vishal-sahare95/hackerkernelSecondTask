@@ -8,12 +8,12 @@ import { MenuComponent } from './partial/menu/menu.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import{HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http'
-import { CategoriesModule } from './pages/admin/categories/categories.module';
 import {MatCardModule} from '@angular/material/card';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ChipsModule } from 'primeng/chips';
 import { DashboardComponent } from './partial/dashboard/dashboard.component';
 import { InterceptorInterceptor } from './config/interceptor.interceptor';
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,10 +27,10 @@ import { InterceptorInterceptor } from './config/interceptor.interceptor';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    CategoriesModule,
     MatCardModule,
     NgbModule,
     ChipsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [
     {

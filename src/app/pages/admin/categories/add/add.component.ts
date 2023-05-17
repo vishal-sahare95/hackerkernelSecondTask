@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { CategoriesService } from 'src/app/config/login/admin/categories/categories.service';
 
 
@@ -14,6 +14,7 @@ import { CategoriesService } from 'src/app/config/login/admin/categories/categor
 export class AddComponent implements OnInit {
     values: string = ''
     public form: FormGroup;
+    public isSnapShotID?:number
 
     public erroMSG = {
         name: [
@@ -27,7 +28,7 @@ export class AddComponent implements OnInit {
 
     }
 
-    constructor(private fb: FormBuilder, private categoriesSRV: CategoriesService, private router: Router, private activeRoute: ActivatedRoute) {
+    constructor(private fb: FormBuilder, private categoriesSRV: CategoriesService, private router: Router, private activeRoute: ActivatedRoute,private toastr: ToastrService) {
         this.form = this.fb.group({
             name: ['', [Validators.required]],
             image: ['', [Validators.required]]
@@ -35,10 +36,8 @@ export class AddComponent implements OnInit {
 
     }
     ngOnInit(): void {
-        if (this.activeRoute.snapshot.params['id']) {
             this.getCategories()
-        }
-
+        this.isSnapShotID=this.activeRoute.snapshot.params['id']
     }
 
     get name() {
@@ -49,18 +48,22 @@ export class AddComponent implements OnInit {
     }
     saveData() {
         if (this.form.valid) {
-            const rid = this.activeRoute.snapshot.params['id']
-            if (rid) {
-                this.categoriesSRV.putCategories(rid, this.form.value).subscribe(suc => {
+            if (this.isSnapShotID) {
+                this.categoriesSRV.putCategories(this.isSnapShotID, this.form.value).subscribe(suc => {
                     console.log(suc);
+                    this.toastr.success('Data add successfully', 'Done');
                     this.router.navigateByUrl('categories/list')
-                })
+                },
+                (error)=>  this.toastr.error('Something wrong', 'Sorry')
+                )
             }
             else {
                 this.categoriesSRV.postCategories(this.form.value).subscribe(suc => {
                     console.log(suc);
+                    this.toastr.success('Data edit successfully', 'Done');
                     this.router.navigateByUrl('categories/list')
-                })
+                },
+                (error)=>  this.toastr.error('Something wrong', 'Sorry'))
             }
         } else {
             this.form.markAllAsTouched()
@@ -71,15 +74,19 @@ export class AddComponent implements OnInit {
     }
 
     getCategories() {
-        const id = this.activeRoute.snapshot.params['id']
-        this.categoriesSRV.getIDCategories(id).subscribe(suc => {
+        const nid = this.activeRoute.snapshot.params['id']
+        if(nid){
+               this.categoriesSRV.getIDCategories(nid).subscribe(suc => {
             this.form = this.fb.group({
-                id: [id],
+                id: [nid],
                 name: [suc.name,],
                 image: [suc.image,],
             })
 
-        })
+        }
+        ,(error)=>  this.toastr.error('Something wrong', 'Sorry'))
+        }
+     
     }
 
 }
